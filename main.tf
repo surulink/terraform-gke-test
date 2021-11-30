@@ -58,6 +58,7 @@ module "gke" {
   remove_default_node_pool    = true
   release_channel             = "RAPID"
   kubernetes_version          = "latest"
+  kubernetes_dashboard        = true
   node_pools = [
     {
       name                  = "regional-pool"
@@ -104,15 +105,4 @@ module "gke" {
      "gke-node", "${var.project_id}-gke"
     ]
   }
-}
-resource "google_compute_firewall" "ssh-rule" {
-  depends_on   = [module.gke]
-  name = "ssh"
-  network  = "${var.network}-${var.env_name}"
-  project  = "${var.project_id}"
-  allow {
-    protocol = "tcp"
-    ports = ["22"]
-  }
-  source_ranges = ["0.0.0.0/0"]
 }
