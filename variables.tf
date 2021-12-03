@@ -1,16 +1,16 @@
 variable "project_id" {
   description = "your_project_id_to_be_entered"
-  default= "my-project-terraform-329615"
+  default     = "my-project-64131-terraform"
 }
 
 variable "region" {
   description = "The region to host the cluster in"
-  default     = "us-west1"
+  default     = "us-central1"
 }
 
 variable "zones" {
   description = "The region to host the cluster in"
-  default     = ["us-west1-a","us-west1-b"]
+  default     = ["us-central1-a", "us-central1-b"]
 }
 
 variable "cluster_name" {
@@ -54,17 +54,4 @@ variable "ip_range_services_name" {
 variable "services_ipv4_cidr_range" {
   description = "The cidr ip range to use for services"
   default     = "10.28.0.0/20"
-}
-
-variable "ssh_user" {
-  description = "The user that Ansible will use"
-  default     = "root"
-}
-
-variable "key_pairs" {
-  type = map
-  default = {
-    root_public_key  = "keys/root_id_ed25519.pub",
-    root_private_key = "keys/root_id_ed25519"
-  }
 }

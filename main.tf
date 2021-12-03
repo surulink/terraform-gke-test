@@ -1,11 +1,11 @@
 provider "google" {
-  project     = var.project_id
-  region      = var.region
+  project = var.project_id
+  region  = var.region
 }
 
 # Retrieve an access token as the Terraform runner
 module "gke_auth" {
-  source = "terraform-google-modules/kubernetes-engine/google//modules/auth"
+  source       = "terraform-google-modules/kubernetes-engine/google//modules/auth"
   depends_on   = [module.gke]
   project_id   = var.project_id
   location     = module.gke.location
@@ -42,41 +42,41 @@ module "gcp-network" {
 }
 
 module "gke" {
-  source                      = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
-  project_id                  = var.project_id
-  name                        = "${var.cluster_name}-${var.env_name}"
-  regional                    = true
-  region                      = var.region
-  zones                       = var.zones
-  network                     = module.gcp-network.network_name
-  subnetwork                  = module.gcp-network.subnets_names[0]
-  ip_range_pods               = var.ip_range_pods_name
-  ip_range_services           = var.ip_range_services_name
-  http_load_balancing         = true
-  horizontal_pod_autoscaling  = true
-  network_policy              = true
-  remove_default_node_pool    = true
-  release_channel             = "RAPID"
-  kubernetes_version          = "latest"
-  kubernetes_dashboard        = true
+  source                     = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
+  project_id                 = var.project_id
+  name                       = "${var.cluster_name}-${var.env_name}"
+  regional                   = true
+  region                     = var.region
+  zones                      = var.zones
+  network                    = module.gcp-network.network_name
+  subnetwork                 = module.gcp-network.subnets_names[0]
+  ip_range_pods              = var.ip_range_pods_name
+  ip_range_services          = var.ip_range_services_name
+  http_load_balancing        = true
+  horizontal_pod_autoscaling = true
+  network_policy             = true
+  remove_default_node_pool   = true
+  release_channel            = "RAPID"
+  kubernetes_version         = "latest"
+  kubernetes_dashboard       = true
   node_pools = [
     {
-      name                  = "regional-pool"
-      preeptible            = false
-      machine_type          = "e2-custom-4-4096"
-      image_type            = "UBUNTU"
-      disk_type             = "pd-balanced"
-      disk_size_gb          = 30
-      local_ssd_count       = 0
-      tags                  = "gke-node"
-      min_count             = 1
-      max_count             = 1
-      max_surge             = 2
-      max_unavailable       = 1
-      autoscaling           = true
-      auto_upgrade          = true
-      auto_repair           = true
-      node_metadata         = "GKE_METADATA_SERVER"
+      name            = "regional-pool"
+      preeptible      = false
+      machine_type    = "e2-custom-4-4096"
+      image_type      = "UBUNTU"
+      disk_type       = "pd-balanced"
+      disk_size_gb    = 30
+      local_ssd_count = 0
+      tags            = "gke-node"
+      min_count       = 1
+      max_count       = 1
+      max_surge       = 2
+      max_unavailable = 1
+      autoscaling     = true
+      auto_upgrade    = true
+      auto_repair     = true
+      node_metadata   = "GKE_METADATA_SERVER"
     },
   ]
   node_pools_oauth_scopes = {
@@ -102,7 +102,7 @@ module "gke" {
     all = []
 
     default-pool = [
-     "gke-node", "${var.project_id}-gke"
+      "gke-node", "${var.project_id}-gke"
     ]
   }
 }
