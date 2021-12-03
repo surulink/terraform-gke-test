@@ -58,7 +58,6 @@ module "gke" {
   remove_default_node_pool   = true
   release_channel            = "RAPID"
   kubernetes_version         = "latest"
-  kubernetes_dashboard       = true
   node_pools = [
     {
       name            = "regional-pool"
