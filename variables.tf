@@ -1,5 +1,5 @@
 variable "project_id" {
-  description = "your_project_id_to_be_entered"
+  description = "your_project_id_to_be_entered_as_a_current"
   default     = "my-project-64131-terraform"
 }
 
